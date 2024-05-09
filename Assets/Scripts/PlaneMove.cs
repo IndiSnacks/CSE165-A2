@@ -11,6 +11,8 @@ public class PlaneMove : MonoBehaviour
     public float maxSpeed;
     public float thrustSensitivity;
 
+    public GameObject wrist;
+
     public GameObject directionObject;
     public float turnSensitivity;
 
@@ -34,15 +36,28 @@ public class PlaneMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, directionObject.transform.rotation, turnSensitivity);
+        float localWristZRot = wrist.transform.localRotation.eulerAngles.z;
+        if (!(100f < localWristZRot && localWristZRot < 250f))
+        {
+            Vector3 eulerRotation = directionObject.transform.rotation.eulerAngles;
+            eulerRotation.z = 0;
+            Quaternion follow = Quaternion.Euler(eulerRotation);
+
+            float turnAcceleration = Quaternion.Angle(rb.transform.rotation, directionObject.transform.rotation) / 45f;
+
+            // rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, directionObject.transform.rotation, turnSensitivity);
+            rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, directionObject.transform.rotation, turnSensitivity * turnAcceleration);
+        }
+        
+        
 
         Vector3 localGripRot = thrustGripObject.transform.localEulerAngles;
         // Debug.Log(localGripRot);
 
         isGripping = (45 < localGripRot.x && localGripRot.x < 120);
 
-        Debug.Log("grip angle: " + localGripRot.x);
-        Debug.Log("is gripping: " + isGripping);
+        //Debug.Log("grip angle: " + localGripRot.x);
+        //Debug.Log("is gripping: " + isGripping);
 
         if (isGripping)
         {
@@ -51,6 +66,7 @@ public class PlaneMove : MonoBehaviour
                 justGripped = true;
                 initialGripZ = rb.transform.InverseTransformPoint(thrustObject.transform.position).z;
             }
+            currentGripZ = rb.transform.InverseTransformPoint(thrustObject.transform.position).z;
             speedFactor = Mathf.Clamp((currentGripZ - initialGripZ) * thrustSensitivity, 0, 1);
         }
         else
@@ -59,7 +75,7 @@ public class PlaneMove : MonoBehaviour
         }
 
         
-        Debug.Log("Speed factor: " + speedFactor);
+        //Debug.Log("Speed factor: " + speedFactor);
 
 
         heading = rb.transform.forward;
