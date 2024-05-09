@@ -47,40 +47,39 @@ public class PlaneMove : MonoBehaviour
 
             // rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, directionObject.transform.rotation, turnSensitivity);
             rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, directionObject.transform.rotation, turnSensitivity * turnAcceleration);
-        }
-        
-        
 
-        Vector3 localGripRot = thrustGripObject.transform.localEulerAngles;
-        // Debug.Log(localGripRot);
+            Vector3 localGripRot = thrustGripObject.transform.localEulerAngles;
+            // Debug.Log(localGripRot);
 
-        isGripping = (45 < localGripRot.x && localGripRot.x < 120);
+            isGripping = (45 < localGripRot.x && localGripRot.x < 120);
 
-        //Debug.Log("grip angle: " + localGripRot.x);
-        //Debug.Log("is gripping: " + isGripping);
+            //Debug.Log("grip angle: " + localGripRot.x);
+            //Debug.Log("is gripping: " + isGripping);
 
-        if (isGripping)
-        {
-            if (!justGripped)
+            if (isGripping)
             {
-                justGripped = true;
-                initialGripZ = rb.transform.InverseTransformPoint(thrustObject.transform.position).z;
+                if (!justGripped)
+                {
+                    justGripped = true;
+                    initialGripZ = rb.transform.InverseTransformPoint(thrustObject.transform.position).z;
+                }
+                currentGripZ = rb.transform.InverseTransformPoint(thrustObject.transform.position).z;
+                speedFactor = Mathf.Clamp((currentGripZ - initialGripZ) * thrustSensitivity, 0, 1);
             }
-            currentGripZ = rb.transform.InverseTransformPoint(thrustObject.transform.position).z;
-            speedFactor = Mathf.Clamp((currentGripZ - initialGripZ) * thrustSensitivity, 0, 1);
-        }
-        else
-        {
-            justGripped = false;
-        }
+            else
+            {
+                justGripped = false;
+            }
 
+
+            //Debug.Log("Speed factor: " + speedFactor);
+
+
+            heading = rb.transform.forward;
+            heading.Normalize();
+            rb.velocity = heading * maxSpeed * speedFactor;
+        }
         
-        //Debug.Log("Speed factor: " + speedFactor);
-
-
-        heading = rb.transform.forward;
-        heading.Normalize();
-        rb.velocity = heading * maxSpeed * speedFactor;
 
         /* =============== Direction ATTEMPT 1 =============== 
          * 
