@@ -6,6 +6,7 @@ using UnityEngine;
 public class RaceTrackParse : MonoBehaviour {
 	[SerializeField] public TextAsset file;
 	[SerializeField] public GameObject CheckPoint;
+	[SerializeField] public GameObject Player;
 
 	private List<GameObject> checkpoints = new List<GameObject>();
 	public GameObject nextCheckpoint;
@@ -26,20 +27,23 @@ public class RaceTrackParse : MonoBehaviour {
 
 	private void Start() {
 		List<Vector3> positions = ParseFile();
-		for(int i = 0; i < positions.Count; i++)
+
+		Instantiate(Player, positions[0], Quaternion.identity);
+
+		for(int i = 1; i < positions.Count; i++)
 		{
 			checkpoints.Add(Instantiate(CheckPoint, positions[i], Quaternion.identity));
 		}
-		nextCheckpoint = checkpoints[0];
+		nextCheckpoint = checkpoints[1];
 	}
 
 	//check if the player has passed a checkpoint and removes it form the list
 	public void CheckPointObserver(GameObject cp){
-		if(checkpoints[0].Equals(cp)){
-			Destroy(checkpoints[0]);
-			checkpoints.RemoveAt(0);
-			if(checkpoints.Count > 0){
-				nextCheckpoint = checkpoints[0];
+		if(checkpoints[1].Equals(cp)){
+			Destroy(checkpoints[1]);
+			checkpoints.RemoveAt(1);
+			if(checkpoints.Count > 1){
+				nextCheckpoint = checkpoints[1];
 			}
 		}
 	}
