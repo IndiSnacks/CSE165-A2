@@ -10,6 +10,7 @@ public class RaceTrackParse : MonoBehaviour {
 
 	private List<GameObject> checkpoints = new List<GameObject>();
 	public GameObject nextCheckpoint;
+	public Vector3 startPoint;
 	List<Vector3> ParseFile()
 	{
 		float ScaleFactor = 1.0f / 39.37f;
@@ -28,6 +29,7 @@ public class RaceTrackParse : MonoBehaviour {
 	private void Start() {
 		List<Vector3> positions = ParseFile();
 
+		startPoint = positions[0];
 		Instantiate(Player, positions[0], Quaternion.identity);
 
 		for(int i = 1; i < positions.Count; i++)

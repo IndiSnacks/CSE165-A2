@@ -347,6 +347,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: machu_picchu_2
       objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 1942716a2523903429fee5d39e18c1bb, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1942716a2523903429fee5d39e18c1bb, type: 3}
 --- !u!1 &692658060 stripped
