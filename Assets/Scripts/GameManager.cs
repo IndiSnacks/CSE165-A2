@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     private bool Started = false;
     public string MaxCheckpoints;
-    private int count = 1;
+    private int count = 0;
 
     [SerializeField] private GameObject CheckpointManager;
     [SerializeField] private GameObject Player;
@@ -53,9 +53,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CheckPointReached(){
-        string strcount = count.ToString();
-        Text.GetComponent<TextMeshProUGUI>().SetText("Checkpoints:" + strcount + "/" + MaxCheckpoints);
-        count++;
+    public void CheckPointReached(int currCheckpoint)
+    {
+        string currCheckpointString = currCheckpoint.ToString();
+        Text.GetComponent<TextMeshProUGUI>().SetText("Checkpoints Left: " + currCheckpointString);
+    }
+
+    public void EndGame(){
+        Text.GetComponent<TextMeshProUGUI>().SetText("Course Comompleted!");
+        PlayerRb.velocity = Vector3.zero;
+        PlayerRb.angularVelocity = Vector3.zero;
+        Player.GetComponent<PlaneMove>().enabled = false;
+        Time.timeScale = 0;
     }
 }

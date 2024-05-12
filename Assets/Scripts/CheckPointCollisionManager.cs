@@ -17,7 +17,6 @@ public class CheckPointCollisionManager : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             checkPointManager.GetComponent<RaceTrackParse>().CheckPointObserver(this.gameObject);
-            gameManager.CheckPointReached();
         }
     
     }
