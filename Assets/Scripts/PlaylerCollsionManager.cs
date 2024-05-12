@@ -18,7 +18,7 @@ public class PlaylerCollsionManager : MonoBehaviour
     {
         if(collision.gameObject.tag == "ground")
         {
-          //rb.velocity = Vector3.zero;
+          //Debug.Log("Game Over");
           GameManager.GetComponent<GameManager>().EndGame();  
         }
     }

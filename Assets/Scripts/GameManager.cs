@@ -17,10 +17,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         CheckpointManager = GameObject.FindGameObjectsWithTag("CheckPointManager")[0];
-        Player = GameObject.FindGameObjectsWithTag("Player")[0];
+        //Player = GameObject.FindGameObjectsWithTag("Player")[0];
         PlayerRb = Player.GetComponent<Rigidbody>();
-        UI = GameObject.FindGameObjectsWithTag("UI")[0];
-        Text = GameObject.FindGameObjectsWithTag("UI")[1];
+        // UI = GameObject.FindGameObjectsWithTag("UI")[0];
+        // Text = GameObject.FindGameObjectsWithTag("UI")[1];
 
         Text.GetComponent<TextMeshProUGUI>().SetText("Thumb Up to Start");
 
@@ -41,14 +41,14 @@ public class GameManager : MonoBehaviour
     {
         if(Started)
         {
-            Debug.Log("Game Over");
+            Debug.Log("End Game");
             Started = false;
             PlayerRb.velocity = Vector3.zero;
             PlayerRb.angularVelocity = Vector3.zero;
             Player.GetComponent<PlaneMove>().enabled = false;
             Text.GetComponent<TextMeshProUGUI>().SetText("Thumb Up to Restart");
 
-            Player.transform.position = CheckpointManager.GetComponent<RaceTrackParse>().startPoint;
+            Player.transform.position = CheckpointManager.GetComponent<RaceTrackParse>().lastCheckPoint;
         }
     }
 }

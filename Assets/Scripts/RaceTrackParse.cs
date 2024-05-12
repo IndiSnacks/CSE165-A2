@@ -11,6 +11,7 @@ public class RaceTrackParse : MonoBehaviour {
 	private List<GameObject> checkpoints = new List<GameObject>();
 	public GameObject nextCheckpoint;
 	public Vector3 startPoint;
+	public Vector3 lastCheckPoint;
 	List<Vector3> ParseFile()
 	{
 		float ScaleFactor = 1.0f / 39.37f;
@@ -30,7 +31,9 @@ public class RaceTrackParse : MonoBehaviour {
 		List<Vector3> positions = ParseFile();
 
 		startPoint = positions[0];
-		Instantiate(Player, positions[0], Quaternion.identity);
+		Player.transform.position = startPoint;
+		Player.transform.rotation = Quaternion.identity;
+		Player.GetComponent<PlaneMove>().enabled = false;
 
 		for(int i = 1; i < positions.Count; i++)
 		{
@@ -42,6 +45,7 @@ public class RaceTrackParse : MonoBehaviour {
 	//check if the player has passed a checkpoint and removes it form the list
 	public void CheckPointObserver(GameObject cp){
 		if(checkpoints[1].Equals(cp)){
+			lastCheckPoint = checkpoints[1].transform.position;
 			Destroy(checkpoints[1]);
 			checkpoints.RemoveAt(1);
 			if(checkpoints.Count > 1){
