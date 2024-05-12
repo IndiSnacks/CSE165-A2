@@ -49,10 +49,14 @@ public class RaceTrackParse : MonoBehaviour {
 	//check if the player has passed a checkpoint and removes it form the list
 	public void CheckPointObserver(GameObject cp){
 		if(checkpoints[0].Equals(cp)){
-			gameManager.CheckPointReached(checkpoints.Count);
+
+			gameManager.setCheckPointsLeft(checkpoints.Count - 1);
+			gameManager.CheckPointRender();
+
 			lastCheckPoint = checkpoints[0].transform.position;
 			Destroy(checkpoints[0]);
 			checkpoints.RemoveAt(0);
+			
 			if(checkpoints.Count > 0){
 				nextCheckpoint = checkpoints[0];
 			}

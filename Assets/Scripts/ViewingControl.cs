@@ -51,6 +51,7 @@ public class ViewingControl : MonoBehaviour
             {
                 //Debug.Log("Thumbs Up" + Vector3.Distance(wristPos, thumbTipPos));
                 gameManager.StartGame();
+
             }
 
             if (Vector3.Distance(wristPos, ringTipPos) > proximityThreshold)

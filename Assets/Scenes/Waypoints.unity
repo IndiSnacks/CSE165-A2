@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571398, b: 0.30692294, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -335,11 +335,12 @@ MonoBehaviour:
   file: {fileID: 4900000, guid: 32f929ed6f4814c2f94a142fc43352c3, type: 3}
   CheckPoint: {fileID: 8582197204800578582, guid: 5a2449cd1b3204bc4a6a26cfd0a638c5, type: 3}
   Player: {fileID: 1692543501}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 625514232}
   checkpoints: []
   nextCheckpoint: {fileID: 0}
   startPoint: {x: 0, y: 0, z: 0}
   lastCheckPoint: {x: 0, y: 0, z: 0}
+  MaxCheckpoints: 0
 --- !u!1 &625514231
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 625514233}
   - component: {fileID: 625514232}
+  - component: {fileID: 625514234}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -375,6 +377,7 @@ MonoBehaviour:
   PlayerRb: {fileID: 0}
   UI: {fileID: 1843482532}
   Text: {fileID: 1133183813}
+  Countdown: {fileID: 625514234}
 --- !u!4 &625514233
 Transform:
   m_ObjectHideFlags: 0
@@ -390,37 +393,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &629521435
-GameObject:
+--- !u!114 &625514234
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 629521436}
-  m_Layer: 0
-  m_Name: Timer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &629521436
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629521435}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.661441, y: -15.214033, z: 1.7110002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 625514231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0633ad6b8da27da48ac49bf7da6dd0f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Text: {fileID: 1133183813}
+  gameManager: {fileID: 625514231}
 --- !u!1001 &692658059
 PrefabInstance:
   m_ObjectHideFlags: 0
