@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject CheckpointManager;
     [SerializeField] private GameObject Player;
+    [SerializeField] private Rigidbody PlayerRb;
     [SerializeField] private GameObject UI;
     [SerializeField] private GameObject Text;
     // Start is called before the first frame update
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     {
         CheckpointManager = GameObject.FindGameObjectsWithTag("CheckPointManager")[0];
         Player = GameObject.FindGameObjectsWithTag("Player")[0];
+        PlayerRb = Player.GetComponent<Rigidbody>();
         UI = GameObject.FindGameObjectsWithTag("UI")[0];
         Text = GameObject.FindGameObjectsWithTag("UI")[1];
 
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Game Over");
             Started = false;
+            PlayerRb.velocity = Vector3.zero;
+            PlayerRb.angularVelocity = Vector3.zero;
             Player.GetComponent<PlaneMove>().enabled = false;
             Text.GetComponent<TextMeshProUGUI>().SetText("Thumb Up to Restart");
 
