@@ -8,7 +8,7 @@ public class RaceTrackParse : MonoBehaviour {
 	[SerializeField] public GameObject CheckPoint;
 	[SerializeField] public GameObject Player;
 
-	private List<GameObject> checkpoints = new List<GameObject>();
+	public List<GameObject> checkpoints = new List<GameObject>();
 	public GameObject nextCheckpoint;
 	public Vector3 startPoint;
 	public Vector3 lastCheckPoint;

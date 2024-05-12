@@ -19,7 +19,7 @@ public class PlaylerCollsionManager : MonoBehaviour
         if(collision.gameObject.tag == "ground")
         {
           //Debug.Log("Game Over");
-          GameManager.GetComponent<GameManager>().EndGame();  
+          GameManager.GetComponent<GameManager>().Crash();  
         }
     }
 }

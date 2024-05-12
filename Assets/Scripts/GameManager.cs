@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private bool Started = false;
+    public string MaxCheckpoints;
+    private int count = 1;
 
     [SerializeField] private GameObject CheckpointManager;
     [SerializeField] private GameObject Player;
@@ -17,10 +20,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         CheckpointManager = GameObject.FindGameObjectsWithTag("CheckPointManager")[0];
-        //Player = GameObject.FindGameObjectsWithTag("Player")[0];
         PlayerRb = Player.GetComponent<Rigidbody>();
-        // UI = GameObject.FindGameObjectsWithTag("UI")[0];
-        // Text = GameObject.FindGameObjectsWithTag("UI")[1];
+        MaxCheckpoints = CheckpointManager.GetComponent<RaceTrackParse>().checkpoints.Count.ToString();
 
         Text.GetComponent<TextMeshProUGUI>().SetText("Thumb Up to Start");
 
@@ -33,11 +34,11 @@ public class GameManager : MonoBehaviour
         {
             Started = true;
             Player.GetComponent<PlaneMove>().enabled = true;
-            Text.GetComponent<TextMeshProUGUI>().SetText(" ");
+            Text.GetComponent<TextMeshProUGUI>().SetText("Checkpoints: 0/" + MaxCheckpoints);
         }
     }
 
-    public void EndGame()
+    public void Crash()
     {
         if(Started)
         {
@@ -50,5 +51,11 @@ public class GameManager : MonoBehaviour
 
             Player.transform.position = CheckpointManager.GetComponent<RaceTrackParse>().lastCheckPoint;
         }
+    }
+
+    public void CheckPointReached(){
+        string strcount = count.ToString();
+        Text.GetComponent<TextMeshProUGUI>().SetText("Checkpoints:" + strcount + "/" + MaxCheckpoints);
+        count++;
     }
 }

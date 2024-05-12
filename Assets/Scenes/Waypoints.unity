@@ -321,6 +321,7 @@ MonoBehaviour:
   file: {fileID: 4900000, guid: 32f929ed6f4814c2f94a142fc43352c3, type: 3}
   CheckPoint: {fileID: 8582197204800578582, guid: 5a2449cd1b3204bc4a6a26cfd0a638c5, type: 3}
   Player: {fileID: 1692543501}
+  checkpoints: []
   nextCheckpoint: {fileID: 0}
   startPoint: {x: 0, y: 0, z: 0}
   lastCheckPoint: {x: 0, y: 0, z: 0}

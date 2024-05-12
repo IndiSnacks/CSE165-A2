@@ -29,7 +29,7 @@ public class ViewingControl : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.tag == "Ground")
         {
-            gameManager.EndGame();
+            gameManager.Crash();
         }
     }
 
